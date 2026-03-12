@@ -32,11 +32,11 @@ class FFNN(nn.Module):
 
     def forward(self, input_vector):
         # [to fill] obtain first hidden layer representation
-
+        hidden = self.activation(self.W1(input_vector))
         # [to fill] obtain output layer representation
-
+        output = self.W2(hidden)
         # [to fill] obtain probability dist.
-
+        predicted_vector = self.softmax(output)
         return predicted_vector
 
 
@@ -184,4 +184,9 @@ if __name__ == "__main__":
         print("Validation time for this epoch: {}".format(time.time() - start_time))
 
     # write out to results/test.out
-    
+    with open("results/test.out", "w") as f:
+        f.write("Test data path: {}\n".format(args.test_data))
+        f.write("Hidden dimension: {}\n".format(args.hidden_dim))
+        f.write("Number of epochs: {}\n".format(args.epochs))
+        f.write("Final training accuracy: {}\n".format(correct / total))
+        f.write("Final validation accuracy: {}\n".format(correct / total))  
